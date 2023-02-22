@@ -1,45 +1,64 @@
 'use strict'
 
-const button = document.querySelector('.nav-button');
-const nav = document.querySelector('.nav')
-const header = document.querySelector('.header');
-//background ng body ung blue
+const collapsedClass = "nav--collapsed";
+const active = "active";
+const lsKey = "navCollapsed";
+const nav = document.querySelector(".nav");
+const navBorder = nav.querySelector(".nav__border");
+const navButton = nav.querySelector(".nav__button");
+const navButtons = nav.querySelectorAll(".nav__link");
+let navStatus;
 
-let statusNav = 0;
-button.addEventListener('click', function () {
-    if (statusNav === 0) {
-        nav.classList.add('hidden')
-        statusNav = 1;
+console.log(navButtons);
+// const container = nav.querySelector(".page-container");
+if (localStorage.getItem(lsKey) === "true") {
+    nav.classList.add(collapsedClass);
+}
+
+navBorder.addEventListener("click", () => {
+    if (navStatus === false) {
+        nav.classList.toggle(collapsedClass);
+        localStorage.setItem(lsKey, nav.classList.contains(collapsedClass));
     }
     else {
-        nav.classList.remove('hidden')
-        statusNav = 0;
+        navStatus = false;
     }
-})
 
-button.addEventListener('mouseover', function () {
-    if (statusNav !== 0) {
-        nav.classList.remove('hidden')
-    }
-})
-
-button.addEventListener('mouseout', function () {
-    if (statusNav !== 0) {
-        nav.classList.add('hidden')
-    }
-})
-
-const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
-const stickyNav = function (entries) {
-    const [entry] = entries;
-
-    if (!entry.isIntersecting) nav.classList.add('sticky');
-    else nav.classList.remove('sticky');
-};
-const headerObserver = new IntersectionObserver(stickyNav, {
-    root: null,
-    rootMargin: `-${navHeight}px`,
-    threshold: 0,
+    if (!nav.classList.contains(collapsedClass))
+        nav.classList.add(active);
+    else
+        nav.classList.remove(active);
 });
-headerObserver.observe(header);
+
+navButton.addEventListener("click", () => {
+    if (navStatus === false) {
+        nav.classList.toggle(collapsedClass);
+        localStorage.setItem(lsKey, nav.classList.contains(collapsedClass));
+    }
+    else {
+        navStatus = false;
+    }
+
+
+    if (!nav.classList.contains(collapsedClass))
+        nav.classList.add(active);
+    else
+        nav.classList.remove(active);
+});
+
+nav.addEventListener("mouseover", function () {
+    if (nav.classList.contains(collapsedClass) && !nav.classList.contains(active)) {
+        nav.classList.remove(collapsedClass);
+        localStorage.setItem(lsKey, nav.classList.contains(collapsedClass));
+        navStatus = true;
+    }
+});
+
+nav.addEventListener("mouseout", function () {
+    if (!nav.classList.contains(collapsedClass) && !nav.classList.contains(active)) {
+        nav.classList.add(collapsedClass);
+        localStorage.setItem(lsKey, nav.classList.contains(collapsedClass));
+        navStatus = false;
+    }
+});
+
