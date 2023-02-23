@@ -9,7 +9,6 @@ const navButton = nav.querySelector(".nav__button");
 const navButtons = nav.querySelectorAll(".nav__link");
 let navStatus;
 
-console.log(navButtons);
 // const container = nav.querySelector(".page-container");
 if (localStorage.getItem(lsKey) === "true") {
     nav.classList.add(collapsedClass);
@@ -62,3 +61,20 @@ nav.addEventListener("mouseout", function () {
     }
 });
 
+const handleHover = function (e) {
+    if (e.target.classList.contains('nav__link')) {
+        const link = e.target;
+        const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+        console.log(siblings);
+        //   const logo = link.closest('.nav').querySelector('img');
+
+        navButtons.forEach(el => {
+            if (el !== link) el.style.opacity = this;
+        });
+        // logo.style.opacity = this;
+    }
+};
+
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHover.bind(1));
