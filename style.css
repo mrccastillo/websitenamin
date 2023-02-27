@@ -857,3 +857,31 @@ video {
     border-right: 0;
   }
 }
+
+@media (max-width: 360px) {
+  .about-us-content {
+    min-height: 25rem;
+    /* max-height: 2rem; */
+  }
+}
+
+@media (max-width: 280px) {
+
+  main,
+  .about-us-container,
+  .about-maincontainer,
+  .about-us-content,
+  .about-us-content-wrapper {
+    min-height: 100vh;
+  }
+
+  .about-us-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-maincontainer {
+    flex-direction: column;
+  }
+}
