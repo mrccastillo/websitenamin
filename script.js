@@ -10,15 +10,15 @@ const navActive = "nav--active";
 const lsKey = "navCollapsed";
 
 let navStatus;
-let homeStatus;
+let abtStatus;
 let memStatus;
 let galStatus;
 
 // OBSERVERS
 //HOME OBSERVER
-// Home
-const home = document.querySelector(".page-container");
-const navHome = document.querySelector(".nav__home");
+// About Us
+const home = document.querySelector("#home");
+const navAboutUs = document.querySelector(".nav__about-us");
 
 // Members
 const members = document.querySelector("#id-members");
@@ -32,11 +32,11 @@ const homeObs = function (entries, homeObserver) {
   entries.forEach((entry) => {
     // console.log(entry);
     if (entry.isIntersecting) {
-      navHome.classList.add("active");
+      navAboutUs.classList.add("active");
       navGallery.classList.remove("active");
       navMembers.classList.remove("active");
       galStatus = false;
-      homeStatus = true;
+      abtStatus = true;
       memStatus = false;
     }
   });
@@ -57,10 +57,10 @@ const memObs = function (entries, memObserver) {
     // console.log(entry);
     if (entry.isIntersecting) {
       navMembers.classList.add("active");
-      navHome.classList.remove("active");
+      navAboutUs.classList.remove("active");
       navGallery.classList.remove("active");
       galStatus = false;
-      homeStatus = false;
+      abtStatus = false;
       memStatus = true;
     }
   });
@@ -80,10 +80,10 @@ const galObs = function (entries, galObserver) {
     // console.log(entry);
     if (entry.isIntersecting) {
       navGallery.classList.add("active");
-      navHome.classList.remove("active");
+      navAboutUs.classList.remove("active");
       navMembers.classList.remove("active");
       galStatus = true;
-      homeStatus = false;
+      abtStatus = false;
       memStatus = false;
     }
   });
@@ -132,8 +132,8 @@ navButton.addEventListener("click", () => {
 });
 
 nav.addEventListener("mouseover", function (e) {
-  if (navHome.classList.contains("active")) {
-    navHome.classList.remove("active");
+  if (navAboutUs.classList.contains("active")) {
+    navAboutUs.classList.remove("active");
   } else if (navMembers.classList.contains("active")) {
     navMembers.classList.remove("active");
   } else if (navGallery.classList.contains("active")) {
@@ -151,8 +151,8 @@ nav.addEventListener("mouseover", function (e) {
 });
 
 nav.addEventListener("mouseout", function (e) {
-  if (homeStatus === true) {
-    navHome.classList.add("active");
+  if (abtStatus === true) {
+    navAboutUs.classList.add("active");
   } else if (memStatus === true) {
     navMembers.classList.add("active");
   } else if (galStatus === true) {
@@ -307,10 +307,11 @@ function PlaySound(soundobj) {
 function StopSound(soundobj) {
   var thissound = document.getElementById(soundobj);
   thissound.pause();
-  thissound.currentTime = 0;
+  // thissound.currentTime = 0;
 }
 
-const heading = document.querySelector('.about-us-heading');
+const btnOpenModal = document.querySelectorAll('.btn--open-modal');
+// console.log(btnOpenModal);
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -326,8 +327,8 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-// heading.forEach(btn => btn.addEventListener('click', openModal));
-heading.addEventListener('click', openModal);
+btnOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+// heading.addEventListener('click', openModal);
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -337,3 +338,13 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+const introVid = document.querySelector('.video');
+const vidContainer = document.querySelector('.about-us-image-container');
+vidContainer.addEventListener('mouseover', function () {
+  introVid.play();
+})
+
+vidContainer.addEventListener('mouseout', function () {
+  introVid.pause();
+})

@@ -274,6 +274,7 @@ body {
   box-shadow: 0 0 20px 4px #eca90171;
   transition: all 300ms;
   flex-shrink: 1;
+  /* background-size: cover; */
   /* background-color: rgb(100, 100, 100); */
 }
 
@@ -312,6 +313,7 @@ body {
   align-items: center;
   transition: all 300ms;
   transition-timing-function: ease-out;
+  cursor: pointer;
 }
 
 .about-us-content {
@@ -619,6 +621,12 @@ p {
   background: none;
 }
 
+video {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}
+
 /* Pictures */
 #marc-img {
   background-image: url("img/marc-pfp.jpg");
@@ -751,6 +759,13 @@ p {
     border-right: 0;
   }
 
+  .members-title {
+    width: 100%;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
   .member-wrapper-1,
   .member-wrapper-2,
   .member-wrapper-3,
@@ -760,6 +775,10 @@ p {
     height: auto;
     width: 100%;
     margin-top: 5%;
+  }
+
+  .member-wrapper-1 {
+    margin: 0;
   }
 
   .nav {
@@ -779,6 +798,7 @@ p {
 
   .about-us-content-wrapper {
     width: 100%;
+    height: 100%;
   }
 
   .page-container {
@@ -786,6 +806,6 @@ p {
   }
 
   .main {
-    height: auto;
+    height: 125%;
   }
 }
