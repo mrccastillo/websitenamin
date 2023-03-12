@@ -1,5 +1,6 @@
 "use strict";
-
+// Note for sean
+// Edit name using js and put every bday hehe
 // NAV
 const nav = document.querySelector(".nav");
 const navBorder = nav.querySelector(".nav__border");
@@ -273,32 +274,6 @@ const gallObserver = new IntersectionObserver(galObs, {
 
 gallObserver.observe(gallery);
 
-// di ko mapagana hahhahahahhaahhaa
-// blurs other nav buttons when selecting one
-// const handleHover = function (e) {
-//   if (e.target.classList.contains("nav__link")) {
-//     const link = e.target;
-//     const siblings = nav.querySelectorAll(".nav__link");
-//     //   const logo = link.closest('.nav').querySelector('img');
-
-//     siblings.forEach((el) => {
-//       if (el !== link) el.style.opacity = this;
-//     });
-//     // logo.style.opacity = this;
-//   }
-// };
-
-// navButtons.forEach(function () {
-//   addEventListener("mouseover", handleHover.bind(0.5));
-// });
-
-// navButtons.forEach(function () {
-//   addEventListener("mouseout", handleHover.bind(1));
-// });
-
-// navButtons.forEach((onmouseover = handleHover.bind(0.5)));
-// navButtons.forEach((onmouseout = handleHover.bind(0.5)));
-
 function PlaySound(soundobj) {
   var thissound = document.getElementById(soundobj);
   thissound.play();
@@ -310,10 +285,9 @@ function StopSound(soundobj) {
   // thissound.currentTime = 0;
 }
 
-const btnOpenModal = document.querySelectorAll('.btn--open-modal');
-// console.log(btnOpenModal);
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
+const btnOpenModal = document.querySelectorAll('.btn--open-modal');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 
 const openModal = function (e) {
@@ -328,8 +302,6 @@ const closeModal = function () {
 };
 
 btnOpenModal.forEach(btn => btn.addEventListener('click', openModal));
-// heading.addEventListener('click', openModal);
-
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
@@ -339,12 +311,52 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-const introVid = document.querySelector('.video');
-const vidContainer = document.querySelector('.about-us-image-container');
-vidContainer.addEventListener('mouseover', function () {
-  introVid.play();
-})
+// const introVid = document.querySelector('.video');
+// const vidContainer = document.querySelector('.about-us-image-container');
+// vidContainer.addEventListener('mouseover', function () {
+//   introVid.play();
+// })
 
-vidContainer.addEventListener('mouseout', function () {
-  introVid.pause();
-})
+// vidContainer.addEventListener('mouseout', function () {
+//   introVid.pause();
+// })
+
+// Event Handler
+//FOT TESTING
+let currentDate = new Date("March 02 2023");
+const eventModal = document.querySelector('.event--modal');
+const eventOverlay = document.querySelector('.event__overlay');
+// const eventBtnOpenModal = document.querySelectorAll('.btn--open-modal');
+const eventBtnCloseModal = document.querySelector('.btn--close--event-modal');
+
+const openEventModal = function () {
+  // e.preventDefault();
+  eventModal.classList.remove('hidden');
+  eventOverlay.classList.remove('hidden');
+  localStorage.setItem("ModalClosed", "false");
+};
+
+const closeEventModal = function () {
+  eventModal.classList.add('hidden');
+  eventOverlay.classList.add('hidden');
+  localStorage.setItem("ModalClosed", "true");
+};
+
+eventBtnCloseModal.addEventListener('click', closeEventModal);
+eventOverlay.addEventListener('click', closeEventModal);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal();
+  }
+});
+
+if (currentDate.getDate() === new Date().getDate() && localStorage.getItem("ModalClosed") === "false") {
+  openEventModal();
+}
+
+// ----- IMAGE ZOOM -----
+const images = document.querySelectorAll('.member-image');
+images.forEach(img => addEventListener('click', function () {
+  img.classList.toggle('zoom');
+}));
